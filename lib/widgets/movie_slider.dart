@@ -7,8 +7,7 @@ class MovieSliderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 250,
-      color: Colors.red,
+      height: 260,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -16,11 +15,14 @@ class MovieSliderScreen extends StatelessWidget {
           children: [
             const Text('Populares',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(
+              height: 5,
+            ),
             Expanded(
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
-                  itemBuilder: (_, int index) => _moviePoster()),
+                  itemBuilder: (context, int index) => _moviePoster(context)),
             )
           ],
         ),
@@ -29,18 +31,32 @@ class MovieSliderScreen extends StatelessWidget {
   }
 }
 
-StatelessWidget _moviePoster() {
+StatelessWidget _moviePoster(BuildContext context) {
   return Container(
       width: 130,
       height: 190,
-      color: Colors.green,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(children: const [
-        FadeInImage(
-          image: NetworkImage('https://picsum.photos/200/300'),
-          placeholder: AssetImage('assets/img/no-image.jpg'),
-          fit: BoxFit.cover,
-          height: 150,
+      child: Column(children: [
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, 'details',
+              arguments: 'movie-instance'),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: const FadeInImage(
+              image: NetworkImage('https://picsum.photos/300/400'),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
+              fit: BoxFit.cover,
+              height: 190,
+              width: 130,
+            ),
+          ),
         ),
+        const SizedBox(height: 5),
+        const Text(
+          'StarWars StarWars StarWars',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          textAlign: TextAlign.center,
+        )
       ]));
 }

@@ -19,6 +19,9 @@ class HomeScreen extends StatelessWidget {
             children: const [
               CardSwiperScreen(),
               MovieSliderScreen(),
+              MovieSliderScreen(),
+              MovieSliderScreen(),
+              MovieSliderScreen(),
             ],
           ),
         ));
