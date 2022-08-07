@@ -44,7 +44,7 @@ StatelessWidget _moviePoster(BuildContext context) {
             borderRadius: BorderRadius.circular(20),
             child: const FadeInImage(
               image: NetworkImage('https://picsum.photos/300/400'),
-              placeholder: AssetImage('assets/img/no-image.jpg'),
+              placeholder: AssetImage('assets/no-image.jpg'),
               fit: BoxFit.cover,
               height: 190,
               width: 130,
