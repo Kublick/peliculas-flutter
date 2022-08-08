@@ -59,7 +59,8 @@ class _MovieSliderScreenState extends State<MovieSliderScreen> {
                   itemCount: widget.movies.length,
                   itemBuilder: (context, int index) {
                     final movie = widget.movies[index];
-                    return _moviePoster(context, movie);
+                    return _moviePoster(context, movie,
+                        '${widget.title} -$index - ${widget.movies[index].id}  ');
                   }),
             )
           ],
@@ -69,7 +70,8 @@ class _MovieSliderScreenState extends State<MovieSliderScreen> {
   }
 }
 
-StatelessWidget _moviePoster(BuildContext context, Movie movie) {
+StatelessWidget _moviePoster(BuildContext context, Movie movie, String heroId) {
+  movie.heroId = heroId;
   return Container(
       width: 130,
       height: 190,
@@ -78,14 +80,17 @@ StatelessWidget _moviePoster(BuildContext context, Movie movie) {
         GestureDetector(
           onTap: () =>
               Navigator.pushNamed(context, 'details', arguments: movie),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              image: NetworkImage(movie.fullPosterImg),
-              placeholder: const AssetImage('assets/no-image.jpg'),
-              fit: BoxFit.cover,
-              height: 190,
-              width: 130,
+          child: Hero(
+            tag: movie.heroId!,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                image: NetworkImage(movie.fullPosterImg),
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                fit: BoxFit.cover,
+                height: 190,
+                width: 130,
+              ),
             ),
           ),
         ),
